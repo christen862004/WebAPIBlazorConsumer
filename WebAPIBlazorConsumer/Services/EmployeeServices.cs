@@ -7,10 +7,11 @@ namespace WebAPIBlazorConsumer.Services
     {
         //Sourec Web API Provider "HttpClient"
         HttpClient httpClient;
-        public EmployeeServices()
+        public EmployeeServices(HttpClient client)
         {
-            httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri("http://localhost:7960");
+            httpClient = client;
+            //httpClient = new HttpClient();
+            //httpClient.BaseAddress = new Uri("http://localhost:7960");
         }
         public async Task Delete(int id)
         {
@@ -26,6 +27,8 @@ namespace WebAPIBlazorConsumer.Services
 
         public async Task<Employee> GetById(int id)
         {
+            //HttpRequestMessage requestMessage;
+            //requestMessage.Headers.Append("Ahuthor","Bre")
             Employee emp=await httpClient.GetFromJsonAsync<Employee>($"/api/Emp/{id}");
             return emp;
         }
